@@ -11,16 +11,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import static nathan_kaleb_monica.GUI.Artists;
+import static nathan_kaleb_monica.GUI.Recent;
 import static nathan_kaleb_monica.GUI.SearchSize;
 import static nathan_kaleb_monica.GUI.Song;
+import static nathan_kaleb_monica.GUI.Songs;
 import static nathan_kaleb_monica.GUI.Years;
 
 /**
  *
  * @author Nathan
  */
-public class UpdateArtistSongYear {
-    public static void update_artistsongyear() {
+public class UpdateData {
+
+    public static void update_data() {
         System.out.println("-------- MySQL JDBC Connection Testing ------------");
 
         try {
@@ -46,31 +49,52 @@ public class UpdateArtistSongYear {
 
         if (connection != null) {
             try {
-
+                String art = null, song = null;
+                int year = 0;
                 Statement st = connection.createStatement();
-                String art = Artists.getText();
-                String son = Song.getText();
-                int ye = Integer.parseInt(Years.getText());
+                if (Artists.getText().equals("")) {
+                    System.out.println("No Artist");
+                } else {
+                    art = Artists.getText();
+                    Recent.append(Artists.getText() + " ");
+                }
+
+                if (Songs.getText().equals("")) {
+                    System.out.println("No Song");
+                } else {
+                    song = Artists.getText();
+                    Recent.append(Song.getText() + " ");
+                }
+
+                if (Years.getText().equals("")) {
+                    System.out.println("No Year");
+                } else {
+                    year = Integer.parseInt(Years.getText());
+                    Recent.append(Years.getText() + " ");
+                }
+                Recent.append("\n");
                 int result = Integer.parseInt(SearchSize.getText());
+                Artists.setText("");
                 Song.setText("");
                 Years.setText("");
-                Artists.setText("");
-                ResultSet res = st.executeQuery("Select * From Track_year  Where song_title like'" + son + "%' and year = '" +ye+"' artist_name = '"+art+"%' or artist_name like'%" + art + "%' limit "+result+"");//artist_name='someartist'
 
+                GUI.year.setText("");
+                GUI.artist.setText("");
+                GUI.Songs.setText("");
+                //ResultSet res = st.executeQuery("Select * From Track_year Where (artist_name like'%" + art + "%' or artist_name like'" + art + "%' ) or (song_title like'%" + song + "%' or song_title like'" + song + "%' ) or year = '" + year + "'limit " + result + "");//artist_name='someartist'
+                ResultSet res = st.executeQuery("Select * From Track_year Where artist_name ='" + art + "'or song_title= '" + song + "'or year = '" + year + "'limit " + result + "");//artist_name='someartist'
                 while (res.next()) {
 
                     String artist_name = res.getString("artist_name");
                     String song_title = res.getString("song_title");
                     int years = res.getInt("year");
-
-                    System.out.println(song_title);
                     GUI.year.append(years + "\n");
                     GUI.artist.append(artist_name + "\n");
                     GUI.Songs.append(song_title + "\n");
 
                 }
             } catch (SQLException ex) {
-               // Logger.getLogger(UpdateResults.class.getName()).log(Level.SEVERE, null, ex);
+                // Logger.getLogger(UpdateResults.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

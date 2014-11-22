@@ -44,7 +44,7 @@ public class GUI extends javax.swing.JFrame {
         Minus = new javax.swing.JButton();
         Plus = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        displayPanel = new javax.swing.JPanel();
+        Artist_panel = new javax.swing.JPanel();
         resultScroll = new javax.swing.JScrollPane();
         Songs = new javax.swing.JTextArea();
         recentScroll = new javax.swing.JScrollPane();
@@ -96,12 +96,22 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        Song.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SongActionPerformed(evt);
+            }
+        });
         Song.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 SongKeyPressed(evt);
             }
         });
 
+        Years.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YearsActionPerformed(evt);
+            }
+        });
         Years.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 YearsKeyPressed(evt);
@@ -191,9 +201,9 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        displayPanel.setMaximumSize(new java.awt.Dimension(500, 298));
-        displayPanel.setMinimumSize(new java.awt.Dimension(500, 298));
-        displayPanel.setPreferredSize(new java.awt.Dimension(500, 298));
+        Artist_panel.setMaximumSize(new java.awt.Dimension(500, 298));
+        Artist_panel.setMinimumSize(new java.awt.Dimension(500, 298));
+        Artist_panel.setPreferredSize(new java.awt.Dimension(500, 298));
 
         Songs.setEditable(false);
         Songs.setFocusable(false);
@@ -214,11 +224,11 @@ public class GUI extends javax.swing.JFrame {
         Recent.setTabSize(0);
         jScrollPane2.setViewportView(Recent);
 
-        javax.swing.GroupLayout displayPanelLayout = new javax.swing.GroupLayout(displayPanel);
-        displayPanel.setLayout(displayPanelLayout);
-        displayPanelLayout.setHorizontalGroup(
-            displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(displayPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout Artist_panelLayout = new javax.swing.GroupLayout(Artist_panel);
+        Artist_panel.setLayout(Artist_panelLayout);
+        Artist_panelLayout.setHorizontalGroup(
+            Artist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Artist_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(recentScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -229,11 +239,11 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        displayPanelLayout.setVerticalGroup(
-            displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(displayPanelLayout.createSequentialGroup()
+        Artist_panelLayout.setVerticalGroup(
+            Artist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Artist_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Artist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addComponent(resultScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                     .addComponent(recentScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
@@ -264,7 +274,7 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(displayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(Artist_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addComponent(searchPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -287,7 +297,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(resultLabel)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(displayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Artist_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -373,48 +383,26 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchSizeActionPerformed
 
+    private void SongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SongActionPerformed
+
+    private void YearsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_YearsActionPerformed
+
     private void executeSearch() {
         update();
     }
 
     public static void update() {
-        artist.setText("");
-        Songs.setText("");
-        year.setText("");
-        if(Artists.getText().equals("") && Song.getText().equals("") && Years.getText().equals("")){
-            System.out.println();
-        }
-        else if (Artists.getText().equals("") && Song.getText().equals("")) {
-            Recent.append(Years.getText() + "\n");
-            UpdateYear.update_year();
-        }
-        else if (Years.getText().equals("") && Song.getText().equals("")) {
-            Recent.append(Artists.getText() + "\n");
-            UpdateArtist.update_artist();
-        }
-        else if (Years.getText().equals("") && Artists.getText().equals("")) {
-            Recent.append(Song.getText() + "\n");
-            UpdateSong.update_song();
-        }
-        else if (Years.getText().equals("")) {
-            Recent.append(Artists.getText() +", "+ Song.getText()+"\n");
-            UpdateArtistSong.update_artistsong();
-        }
-        else if (Songs.getText().equals("")) {
-            Recent.append(Artists.getText() +", "+ Years.getText()+"\n");
-            UpdateArtistYear.update_artistyear();
-        }
-        else if (Artists.getText().equals("")) {
-            Recent.append(Songs.getText() +", "+ Years.getText()+"\n");
-            UpdateSongYear.update_songyear();
-        }
-        else{
-            Recent.append(Artists.getText()+", "+Songs.getText() +", "+ Years.getText()+"\n");
-            UpdateArtistSongYear.update_artistsongyear();
-        }
+
+        UpdateData.update_data();
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Artist_panel;
     public static javax.swing.JTextField Artists;
     private javax.swing.JButton Minus;
     private javax.swing.JButton Plus;
@@ -424,7 +412,6 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JTextArea Songs;
     public static javax.swing.JTextField Years;
     public static javax.swing.JTextArea artist;
-    private javax.swing.JPanel displayPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
