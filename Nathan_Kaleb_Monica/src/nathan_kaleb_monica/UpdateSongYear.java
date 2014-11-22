@@ -53,7 +53,7 @@ public class UpdateSongYear {
                 int result = Integer.parseInt(SearchSize.getText());
                 Song.setText("");
                 Years.setText("");
-                ResultSet res = st.executeQuery("Select * From Track_year  Where song_title='" + son + "' and year = '" +ye+"'limit "+result+"");//artist_name='someartist'
+                ResultSet res = st.executeQuery("Select * From Track_year  Where song_title like'" + son + "%' and year = '" +ye+"'limit "+result+"");//artist_name='someartist'
 
                 while (res.next()) {
 

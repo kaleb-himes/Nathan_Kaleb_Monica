@@ -115,7 +115,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel3.setText("Year");
 
         SearchSize.setEditable(false);
-        SearchSize.setText("0");
+        SearchSize.setText("10");
         SearchSize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchSizeActionPerformed(evt);
@@ -353,7 +353,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void MinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinusActionPerformed
         int size = Integer.parseInt(SearchSize.getText());
-        if (size > 0) {
+        if (size > 9) {
             size = size - 10;
             String strI = "" + size;
             GUI.SearchSize.setText(strI);
@@ -381,28 +381,37 @@ public class GUI extends javax.swing.JFrame {
         artist.setText("");
         Songs.setText("");
         year.setText("");
-
-        if (Artists.getText().equals("") && Song.getText().equals("")) {
+        if(Artists.getText().equals("") && Song.getText().equals("") && Years.getText().equals("")){
+            System.out.println();
+        }
+        else if (Artists.getText().equals("") && Song.getText().equals("")) {
             Recent.append(Years.getText() + "\n");
             UpdateYear.update_year();
         }
-        if (Years.getText().equals("") && Song.getText().equals("")) {
+        else if (Years.getText().equals("") && Song.getText().equals("")) {
             Recent.append(Artists.getText() + "\n");
             UpdateArtist.update_artist();
         }
-        if (Years.getText().equals("") && Artists.getText().equals("")) {
+        else if (Years.getText().equals("") && Artists.getText().equals("")) {
             Recent.append(Song.getText() + "\n");
             UpdateSong.update_song();
         }
-        if (Years.getText().equals("")) {
+        else if (Years.getText().equals("")) {
+            Recent.append(Artists.getText() +", "+ Song.getText()+"\n");
             UpdateArtistSong.update_artistsong();
         }
-        if (Songs.getText().equals("")) {
+        else if (Songs.getText().equals("")) {
+            Recent.append(Artists.getText() +", "+ Years.getText()+"\n");
             UpdateArtistYear.update_artistyear();
         }
-        /*if (Artists.getText().equals("")) {
+        else if (Artists.getText().equals("")) {
+            Recent.append(Songs.getText() +", "+ Years.getText()+"\n");
             UpdateSongYear.update_songyear();
-        }*/
+        }
+        else{
+            Recent.append(Artists.getText()+", "+Songs.getText() +", "+ Years.getText()+"\n");
+            UpdateArtistSongYear.update_artistsongyear();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

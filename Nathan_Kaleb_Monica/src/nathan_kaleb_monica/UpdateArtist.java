@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import static nathan_kaleb_monica.GUI.Artists;
 import static nathan_kaleb_monica.GUI.Recent;
+import static nathan_kaleb_monica.GUI.SearchSize;
 import static nathan_kaleb_monica.GUI.Years;
 
 /**
@@ -48,9 +49,9 @@ public class UpdateArtist {
 
                 Statement st = connection.createStatement();
                 String art = Artists.getText();
-                
+                int result = Integer.parseInt(SearchSize.getText());
                 Artists.setText("");
-                ResultSet res = st.executeQuery("Select * From Track_year  Where artist_name='" + art + "'limit 400");//artist_name='someartist'
+                ResultSet res = st.executeQuery("Select * From Track_year  Where artist_name like'" + art + "%' or artist_name like'%"+art+"%' limit "+result+"");
 
                 while (res.next()) {
 
