@@ -39,7 +39,7 @@ public class UpdateData {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/SongData", "nathan", "");
+                    .getConnection("jdbc:mysql://localhost:3306/kaleb", "kaleb", "password");
 
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
@@ -69,11 +69,17 @@ public class UpdateData {
                 if (Years.getText().equals("")) {
                     System.out.println("No Year");
                 } else {
-                    year = Integer.parseInt(Years.getText());
+                    try {
+                        year = Integer.parseInt(Years.getText());
+                    }catch(java.lang.NumberFormatException ex){
+                        Years.setText("String in year field, you lose.");
+                    }
                     Recent.append(Years.getText() + " ");
                 }
                 Recent.append("\n");
-                int result = Integer.parseInt(SearchSize.getText());
+                int result = 0;
+                result = Integer.parseInt(SearchSize.getText());
+                
                 Artists.setText("");
                 Song.setText("");
                 Years.setText("");
@@ -81,10 +87,13 @@ public class UpdateData {
                 GUI.year.setText("");
                 GUI.artist.setText("");
                 GUI.Songs.setText("");
-                //ResultSet res = st.executeQuery("Select * From Track_year Where (artist_name like'%" + art + "%' or artist_name like'" + art + "%' ) or (song_title like'%" + song + "%' or song_title like'" + song + "%' ) or year = '" + year + "'limit " + result + "");//artist_name='someartist'
-                ResultSet res = st.executeQuery("Select * From Track_year Where artist_name ='" + art + "'or song_title= '" + song + "'or year = '" + year + "'limit " + result + "");//artist_name='someartist'
+                
+                ResultSet res = st.executeQuery("Select * "
+                        + "From Track_year "
+                        + "Where artist_name ='" + art + "'or song_title= '"
+                            + "" + song + "'or year = '" + year + "'limit "
+                            + "" + result + "");
                 while (res.next()) {
-
                     String artist_name = res.getString("artist_name");
                     String song_title = res.getString("song_title");
                     int years = res.getInt("year");
